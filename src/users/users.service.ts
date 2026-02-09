@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 import { User, UserDocument } from './schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 
@@ -58,5 +59,25 @@ export class UsersService {
     const deletedUser = await this.userModel.findByIdAndDelete(id).exec();
     if (!deletedUser) throw new NotFoundException('User not found');
     return deletedUser;
+  }
+
+  async changePassword(id: string, changePasswordDto: ChangePasswordDto): Promise<any> {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new NotFoundException('Không tìm thấy người dùng');
+    }
+
+    const isMatch = await bcrypt.compare(changePasswordDto.oldPassword, user.password);
+    if (!isMatch) {
+      throw new BadRequestException('Mật khẩu cũ không chính xác');
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(changePasswordDto.newPassword, salt);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    return { message: 'Đổi mật khẩu thành công' };
   }
 }
