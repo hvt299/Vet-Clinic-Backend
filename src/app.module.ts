@@ -11,6 +11,7 @@ import { SettingsModule } from './settings/settings.module';
 import { DoctorsModule } from './doctors/doctors.module';
 import { MedicinesModule } from './medicines/medicines.module';
 import { VaccinesModule } from './vaccines/vaccines.module';
+import { PetVaccinationsModule } from './pet-vaccinations/pet-vaccinations.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { VaccinesModule } from './vaccines/vaccines.module';
     DoctorsModule,
     MedicinesModule,
     VaccinesModule,
+    PetVaccinationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
