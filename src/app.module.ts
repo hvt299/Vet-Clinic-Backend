@@ -9,6 +9,8 @@ import { PetsModule } from './pets/pets.module';
 import { AuthModule } from './auth/auth.module';
 import { SettingsModule } from './settings/settings.module';
 import { DoctorsModule } from './doctors/doctors.module';
+import { MedicinesModule } from './medicines/medicines.module';
+import { VaccinesModule } from './vaccines/vaccines.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { DoctorsModule } from './doctors/doctors.module';
     AuthModule,
     SettingsModule,
     DoctorsModule,
+    MedicinesModule,
+    VaccinesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
