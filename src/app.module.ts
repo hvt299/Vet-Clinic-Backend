@@ -16,6 +16,7 @@ import { TreatmentCoursesModule } from './treatment-courses/treatment-courses.mo
 import { TreatmentSessionsModule } from './treatment-sessions/treatment-sessions.module';
 import { DiagnosesModule } from './diagnoses/diagnoses.module';
 import { PrescriptionsModule } from './prescriptions/prescriptions.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { PrescriptionsModule } from './prescriptions/prescriptions.module';
     TreatmentSessionsModule,
     DiagnosesModule,
     PrescriptionsModule,
+    StatisticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
