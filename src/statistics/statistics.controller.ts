@@ -30,4 +30,10 @@ export class StatisticsController {
   getRecentTreatments() {
     return this.statisticsService.getRecentTreatments();
   }
+
+  @Get('top-diagnoses')
+  @ApiOperation({ summary: 'Lấy top 5 bệnh lý thường gặp' })
+  getTopDiagnoses() {
+    return this.statisticsService.getTopDiagnoses();
+  }
 }

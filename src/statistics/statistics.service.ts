@@ -9,6 +9,7 @@ import { MedicineDocument, Medicine } from '../medicines/schemas/medicine.schema
 import { TreatmentCourseDocument, TreatmentCourse } from '../treatment-courses/schemas/treatment-course.schema';
 import { PetVaccinationDocument, PetVaccination } from '../pet-vaccinations/schemas/pet-vaccination.schema';
 import { TreatmentSessionDocument, TreatmentSession } from '../treatment-sessions/schemas/treatment-session.schema';
+import { DiagnosisDocument, Diagnosis } from '../diagnoses/schemas/diagnosis.schema';
 
 @Injectable()
 export class StatisticsService {
@@ -20,6 +21,7 @@ export class StatisticsService {
         @InjectModel(TreatmentCourse.name) private treatmentCourseModel: Model<TreatmentCourseDocument>,
         @InjectModel(PetVaccination.name) private vaccinationModel: Model<PetVaccinationDocument>,
         @InjectModel(TreatmentSession.name) private sessionModel: Model<TreatmentSessionDocument>,
+        @InjectModel(Diagnosis.name) private diagnosisModel: Model<DiagnosisDocument>,
     ) { }
 
     async getGeneralStats() {
@@ -103,5 +105,18 @@ export class StatisticsService {
             .populate('petId', 'name species')
             .populate('customerId', 'name phoneNumber')
             .exec();
+    }
+
+    async getTopDiagnoses() {
+        return this.diagnosisModel.aggregate([
+            {
+                $group: {
+                    _id: '$name',
+                    count: { $sum: 1 },
+                },
+            },
+            { $sort: { count: -1 } },
+            { $limit: 5 },
+        ]);
     }
 }

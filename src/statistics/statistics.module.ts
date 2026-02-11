@@ -10,6 +10,7 @@ import { Medicine, MedicineSchema } from '../medicines/schemas/medicine.schema';
 import { TreatmentCourse, TreatmentCourseSchema } from '../treatment-courses/schemas/treatment-course.schema';
 import { PetVaccination, PetVaccinationSchema } from '../pet-vaccinations/schemas/pet-vaccination.schema';
 import { TreatmentSession, TreatmentSessionSchema } from '../treatment-sessions/schemas/treatment-session.schema';
+import { Diagnosis, DiagnosisSchema } from '../diagnoses/schemas/diagnosis.schema';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { TreatmentSession, TreatmentSessionSchema } from '../treatment-sessions/
       { name: TreatmentCourse.name, schema: TreatmentCourseSchema },
       { name: PetVaccination.name, schema: PetVaccinationSchema },
       { name: TreatmentSession.name, schema: TreatmentSessionSchema },
+      { name: Diagnosis.name, schema: DiagnosisSchema },
     ]),
   ],
   controllers: [StatisticsController],
