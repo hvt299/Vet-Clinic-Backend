@@ -24,4 +24,10 @@ export class StatisticsController {
   getChartData() {
     return this.statisticsService.getSixMonthTrend();
   }
+
+  @Get('recent-treatments')
+  @ApiOperation({ summary: 'Lấy danh sách 5 ca đang điều trị gần nhất' })
+  getRecentTreatments() {
+    return this.statisticsService.getRecentTreatments();
+  }
 }

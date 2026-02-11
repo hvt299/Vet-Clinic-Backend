@@ -94,4 +94,14 @@ export class StatisticsService {
 
         return chartData;
     }
+
+    async getRecentTreatments() {
+        return this.treatmentCourseModel
+            .find({ status: 'ONGOING' })
+            .sort({ startDate: -1 })
+            .limit(5)
+            .populate('petId', 'name species')
+            .populate('customerId', 'name phoneNumber')
+            .exec();
+    }
 }
