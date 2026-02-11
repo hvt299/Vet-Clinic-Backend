@@ -14,6 +14,8 @@ import { VaccinesModule } from './vaccines/vaccines.module';
 import { PetVaccinationsModule } from './pet-vaccinations/pet-vaccinations.module';
 import { TreatmentCoursesModule } from './treatment-courses/treatment-courses.module';
 import { TreatmentSessionsModule } from './treatment-sessions/treatment-sessions.module';
+import { DiagnosesModule } from './diagnoses/diagnoses.module';
+import { PrescriptionsModule } from './prescriptions/prescriptions.module';
 
 @Module({
   imports: [
@@ -37,6 +39,8 @@ import { TreatmentSessionsModule } from './treatment-sessions/treatment-sessions
     PetVaccinationsModule,
     TreatmentCoursesModule,
     TreatmentSessionsModule,
+    DiagnosesModule,
+    PrescriptionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
