@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsEnum, IsMongoId, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { TreatmentStatus } from '../schemas/treatment-course.schema';
+import { TreatmentStatus, TreatmentRegimen } from '../schemas/treatment-course.schema';
 
 export class CreateTreatmentCourseDto {
     @ApiProperty({ example: '65f1...', description: 'ID Khách hàng' })
@@ -17,6 +17,11 @@ export class CreateTreatmentCourseDto {
     @IsNotEmpty({ message: 'Chẩn đoán sơ bộ không được để trống' })
     @IsString()
     diagnosisSummary: string;
+
+    @ApiProperty({ enum: TreatmentRegimen, default: TreatmentRegimen.INTERNAL, description: 'Phác đồ điều trị' })
+    @IsOptional()
+    @IsEnum(TreatmentRegimen)
+    regimen?: TreatmentRegimen;
 
     @ApiProperty({ example: '2024-02-10T00:00:00.000Z', description: 'Ngày bắt đầu' })
     @IsOptional()

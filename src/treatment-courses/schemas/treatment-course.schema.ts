@@ -8,6 +8,13 @@ export type TreatmentCourseDocument = HydratedDocument<TreatmentCourse>;
 export enum TreatmentStatus {
     ONGOING = 'ONGOING',
     RECOVERED = 'RECOVERED',
+    DECEASED = 'DECEASED',
+    CANCELED = 'CANCELED',
+}
+
+export enum TreatmentRegimen {
+    INTERNAL = 'INTERNAL',
+    SURGERY = 'SURGERY',
 }
 
 @Schema({ timestamps: true })
@@ -20,6 +27,9 @@ export class TreatmentCourse {
 
     @Prop({ required: true })
     diagnosisSummary: string;
+
+    @Prop({ type: String, enum: TreatmentRegimen, default: TreatmentRegimen.INTERNAL })
+    regimen: TreatmentRegimen;
 
     @Prop({ required: true, default: Date.now })
     startDate: Date;
