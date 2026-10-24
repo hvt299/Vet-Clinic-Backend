@@ -6,7 +6,7 @@ import { CustomerDocument, Customer } from '../customers/schemas/customer.schema
 import { PetDocument, Pet } from '../pets/schemas/pet.schema';
 import { DoctorDocument, Doctor } from '../doctors/schemas/doctor.schema';
 import { MedicineDocument, Medicine } from '../medicines/schemas/medicine.schema';
-import { TreatmentCourseDocument, TreatmentCourse } from '../treatment-courses/schemas/treatment-course.schema';
+import { TreatmentCourseDocument, TreatmentCourse, TreatmentStatus } from '../treatment-courses/schemas/treatment-course.schema';
 import { PetVaccinationDocument, PetVaccination } from '../pet-vaccinations/schemas/pet-vaccination.schema';
 import { TreatmentSessionDocument, TreatmentSession } from '../treatment-sessions/schemas/treatment-session.schema';
 import { DiagnosisDocument, Diagnosis } from '../diagnoses/schemas/diagnosis.schema';
@@ -52,7 +52,7 @@ export class StatisticsService {
         });
 
         const activeTreatments = await this.treatmentCourseModel.countDocuments({
-            status: 'ONGOING'
+            status: TreatmentStatus.ONGOING
         });
 
         const sessionsToday = await this.sessionModel.countDocuments({
@@ -99,7 +99,7 @@ export class StatisticsService {
 
     async getRecentTreatments() {
         return this.treatmentCourseModel
-            .find({ status: 'ONGOING' })
+            .find({ status: TreatmentStatus.ONGOING })
             .sort({ startDate: -1 })
             .limit(5)
             .populate('petId', 'name species')
